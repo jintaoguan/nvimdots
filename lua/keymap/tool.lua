@@ -40,6 +40,7 @@ local plug_map = {
 		:with_silent()
 		:with_desc("terminal: Toggle vertical"),
 	["t|<A-\\>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle vertical"),
+	--[[  I don't need another vertical terminal since <A-d> and <C-\> can toggle terminal as well'
 	["n|<F5>"] = map_cr("ToggleTerm direction=vertical")
 		:with_noremap()
 		:with_silent()
@@ -49,6 +50,7 @@ local plug_map = {
 		:with_silent()
 		:with_desc("terminal: Toggle vertical"),
 	["t|<F5>"] = map_cmd("<Cmd>ToggleTerm<CR>"):with_noremap():with_silent():with_desc("terminal: Toggle vertical"),
+	--]]
 	["n|<A-d>"] = map_cr("ToggleTerm direction=float"):with_noremap():with_silent():with_desc("terminal: Toggle float"),
 	["i|<A-d>"] = map_cmd("<Esc><Cmd>ToggleTerm direction=float<CR>")
 		:with_noremap()
@@ -126,6 +128,43 @@ local plug_map = {
 		:with_desc("tool: Miscellaneous"),
 
 	-- Plugin: dap
+	["n|<F5>"] = map_callback(function()
+			require("dap").continue()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Run/Continue"),
+	["n|<F6>"] = map_callback(function()
+			require("dap").toggle_breakpoint()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Toggle breakpoint"),
+	["n|<F7>"] = map_callback(function()
+			require("dap").step_into()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Step into"),
+	["n|<F8>"] = map_callback(function()
+			require("dap").step_over()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Step over"),
+	["n|<F9>"] = map_callback(function()
+			require("dap").terminate()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Stop"),
+	["n|<F10>"] = map_callback(function()
+			require("dap").step_out()
+		end)
+		:with_noremap()
+		:with_silent()
+		:with_desc("debug: Step out"),
+	--[[ This is the original key mapping for debug
 	["n|<F6>"] = map_callback(function()
 			require("dap").continue()
 		end)
@@ -162,6 +201,7 @@ local plug_map = {
 		:with_noremap()
 		:with_silent()
 		:with_desc("debug: Step over"),
+	--]]
 	["n|<leader>db"] = map_callback(function()
 			require("dap").set_breakpoint(vim.fn.input("Breakpoint condition: "))
 		end)
